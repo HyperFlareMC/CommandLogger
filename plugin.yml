@@ -1,0 +1,4 @@
+name: CommandLogger
+version: 0.0.1
+main: HyperFlareMC\CommandLogger\Main
+api: 3.0.0
