@@ -21,8 +21,7 @@ class Main extends PluginBase implements Listener{
         $console = new ConsoleCommandSender();
         $message = $event->getMessage();
         if($message[0] === "/"){
-            $console->sendMessage(TextFormat::AQUA . "<" . $player->getName() . "> [CMD] " . TextFormat::clean($message));
+            $console->sendMessage(TextFormat::WHITE . "COMMAND: <" . $player->getName() . "> " . TextFormat::clean($message));
         }
     }
-
 }
