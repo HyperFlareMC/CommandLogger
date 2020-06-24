@@ -1,0 +1,4 @@
+# Tags:
+# {command_name} -> Get the command executed's name
+# {player_name} -> Get the player's name
+logger-message: "{command_name} sent by {player_name}"
