@@ -23,11 +23,6 @@ class Main extends PluginBase implements Listener{
      */
     private $loggerMessage;
 
-    /**
-     * @var string
-     */
-    private $messageContents;
-
     public function onEnable() : void{
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->saveDefaultConfig();
