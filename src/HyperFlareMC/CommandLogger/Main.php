@@ -32,7 +32,6 @@ class Main extends PluginBase implements Listener{
 
     public function onPlayerCommandPreprocess(PlayerCommandPreprocessEvent $event){
         $player = $event->getPlayer();
-        $console = new ConsoleCommandSender();
         $message = $event->getMessage();
         if($message[0] === "/"){
             $command = $this->loggerMessage;
@@ -43,7 +42,7 @@ class Main extends PluginBase implements Listener{
             foreach($replacements as $tag => $def){
                 $command = str_replace($tag, $def, $command);
             }
-            $console->sendMessage($command);
+            $this->getLogger()->info($command);
         }
     }
 }
