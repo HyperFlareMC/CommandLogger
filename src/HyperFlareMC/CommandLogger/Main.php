@@ -16,32 +16,19 @@ class Main extends PluginBase implements Listener{
     /**
      * @var Config
      */
-    private $config;
-
-    /**
-     * @var string
-     */
-    private $loggerMessage;
+    private static $config;
 
     public function onEnable() : void{
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->saveDefaultConfig();
-        $this->config = $this->getConfig();
-        $this->loggerMessage = $this->config->get("logger-message");
+        self::$config = $this->getConfig()->getAll();
     }
 
     public function onPlayerCommandPreprocess(PlayerCommandPreprocessEvent $event){
         $player = $event->getPlayer();
         $message = $event->getMessage();
         if($message[0] === "/"){
-            $command = $this->loggerMessage;
-            $replacements = [
-                "{command_name}" => $message,
-                "{player_name}" => $player->getName()
-            ];
-            foreach($replacements as $tag => $def){
-                $command = str_replace($tag, $def, $command);
-            }
+            $command = str_replace(["{player}", "{command}], [$player->getName(), $message], self::$config["logger-message"]);
             $this->getLogger()->info($command);
         }
     }
