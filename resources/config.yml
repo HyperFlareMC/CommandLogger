@@ -1,4 +1,12 @@
-# Tags:
-# {command} -> Get the command executed
-# {player} -> Get the player's name
-logger-message: "{command} sent by {player}"
+settings:
+  console: true
+  discord: false
+  webhook-name: "WebhookName"
+  webhook-url: "WebhookURL"
+formats:
+  # set to true or false
+  # Tags:
+  # {command} -> Get the command executed
+  # {player} -> Get the player's name
+  console-message: "CONSOLE {command} was sent by {player}"
+  discord-message: "WEBHOOK {command} was sent by {player}"
