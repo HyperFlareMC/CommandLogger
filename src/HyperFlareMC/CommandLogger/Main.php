@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace HyperFlareMC\CommandLogger;
 
 use pocketmine\event\Listener;
+use pocketmine\event\server\CommandEvent;
 use pocketmine\plugin\PluginBase;
-use pocketmine\event\player\PlayerCommandPreprocessEvent;
 
 class Main extends PluginBase implements Listener{
 
@@ -19,9 +19,9 @@ class Main extends PluginBase implements Listener{
         self::$config = $this->getConfig()->getAll();
     }
 
-    public function onPlayerCommandPreprocess(PlayerCommandPreprocessEvent $event) : void{
-        $player = $event->getPlayer();
-        $message = $event->getMessage();
+    public function onCommandEvent(CommandEvent $event) : void{
+        $player = $event->getSender();
+        $message = $event->getCommand();
         if($message[0] === "/"){
             $consoleMessage = str_replace(["{player}", "{command}"], [$player->getName(), $message], self::$config["formats"]["console-message"]);
             $discordMessage = str_replace(["{player}", "{command}"], [$player->getName(), $message], self::$config["formats"]["discord-message"]);
