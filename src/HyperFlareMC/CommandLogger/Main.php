@@ -10,7 +10,7 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener{
 
-    /** @var mixed[] */
+    /** @var array */
     private static array $config;
 
     public function onEnable() : void{
