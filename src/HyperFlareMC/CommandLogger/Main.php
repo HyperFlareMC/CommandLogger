@@ -22,21 +22,19 @@ class Main extends PluginBase implements Listener{
     public function onCommandEvent(CommandEvent $event) : void{
         $player = $event->getSender();
         $message = $event->getCommand();
-        if($message[0] === "/"){
-            $consoleMessage = str_replace(["{player}", "{command}"], [$player->getName(), $message], self::$config["formats"]["console-message"]);
-            $discordMessage = str_replace(["{player}", "{command}"], [$player->getName(), $message], self::$config["formats"]["discord-message"]);
-            switch(true){
-                case self::$config["settings"]["console"]:
-                    $this->getLogger()->info($consoleMessage);
-                case self::$config["settings"]["discord"]:
-                    $this->sendCommandMessage($discordMessage);
-                    break;
-                default:
-                    $this->getLogger()->critical("CommandLogger being disabled, no config options enabled...");
-                    $this->getServer()->getPluginManager()->disablePlugin($this);
-                    break;
+        $consoleMessage = str_replace(["{player}", "{command}"], [$player->getName(), $message], self::$config["formats"]["console-message"]);
+        $discordMessage = str_replace(["{player}", "{command}"], [$player->getName(), $message], self::$config["formats"]["discord-message"]);
+        switch(true){
+            case self::$config["settings"]["console"]:
+                $this->getLogger()->info($consoleMessage);
+            case self::$config["settings"]["discord"]:
+                $this->sendCommandMessage($discordMessage);
+                break;
+            default:
+                $this->getLogger()->critical("CommandLogger being disabled, no config options enabled...");
+                $this->getServer()->getPluginManager()->disablePlugin($this);
+                break;
             }
-        }
     }
 
     public function sendCommandMessage(string $msg) : void{
